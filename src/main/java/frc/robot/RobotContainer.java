@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.Drive;
+import frc.robot.commands.DriveShift;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.DriveGearbox;
 
@@ -25,12 +26,11 @@ import frc.robot.subsystems.DriveGearbox;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveGearbox left = new DriveGearbox(RobotMap.LEFT_GEARBOX_LEFT, RobotMap.LEFT_GEARBOX_RIGHT);
-  private final DriveGearbox right = new DriveGearbox(RobotMap.RIGHT_GEARBOX_LEFT, RobotMap.RIGHT_GEARBOX_RIGHT);
+  private final DriveGearbox left, right;
 
-  private final DriveBase driveBase = new DriveBase(left, right);
+  private final DriveBase driveBase;
 
-  private final Drive driveCommand = new Drive(driveBase, (DoubleSupplier)Robot.oi.driveLeft, (DoubleSupplier)Robot.oi.driveRight);
+  private final Drive driveCommand;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -38,6 +38,15 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    left = new DriveGearbox(RobotMap.SPEED_MODE_ACTUATOR, RobotMap.TORQUE_MODE_ACTUATOR,
+                            RobotMap.LEFT_GEARBOX_LEFT, RobotMap.LEFT_GEARBOX_RIGHT);
+    right = new DriveGearbox( RobotMap.SPEED_MODE_ACTUATOR, RobotMap.TORQUE_MODE_ACTUATOR,
+                              RobotMap.RIGHT_GEARBOX_LEFT, RobotMap.RIGHT_GEARBOX_RIGHT);
+
+    driveBase = new DriveBase(left, right);
+
+    driveCommand = new Drive(driveBase, (DoubleSupplier)Robot.oi.driveLeft, (DoubleSupplier)Robot.oi.driveRight);
   }
 
   /**
@@ -47,6 +56,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    Robot.oi.gearboxShift.whenPressed(new DriveShift(driveBase));
   }
 
   /**

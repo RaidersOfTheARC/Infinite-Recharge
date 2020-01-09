@@ -7,16 +7,20 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveGearbox extends SubsystemBase {
     
     SpeedController[] m_controllers;
+    Solenoid m_actuatorIn, m_actuatorOut;
 
-    public DriveGearbox(SpeedController... controllers) {
+    public DriveGearbox(Solenoid shifterIn, Solenoid shifterOut, SpeedController... controllers) {
         m_controllers = controllers;
-        
+        m_actuatorIn = shifterIn;
+        m_actuatorOut = shifterOut;
+
         if (m_controllers.length > 1 && !checkSpeedControllers()) {
             boolean firstMotorInversionStatus = m_controllers[0].getInverted();
 
@@ -41,4 +45,10 @@ public class DriveGearbox extends SubsystemBase {
     public void disable() {
         driveOutput(0);
     }
+
+    public void shift(boolean isShifted) {
+        m_actuatorIn.set(isShifted);
+        m_actuatorOut.set(!isShifted);
+    }
+
 }
