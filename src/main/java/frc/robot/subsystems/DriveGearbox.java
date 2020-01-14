@@ -43,7 +43,9 @@ public class DriveGearbox extends SubsystemBase {
     }
 
     public void disable() {
-        driveOutput(0);
+        for (SpeedController controller : m_controllers) {
+            controller.disable();
+        }
     }
 
     public void shift(boolean isShifted) {

@@ -7,16 +7,18 @@
 
 package frc.robot;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-
+import frc.robot.commands.CloseGate;
 import frc.robot.commands.Drive;
 import frc.robot.commands.DriveShift;
+import frc.robot.commands.OpenGate;
+import frc.robot.commands.SpinPanel;
+import frc.robot.subsystems.CollectorGate;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.DriveGearbox;
+import frc.robot.subsystems.PanelSpinner;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -30,7 +32,9 @@ public class RobotContainer {
 
   private final DriveBase driveBase;
 
-  private final Drive driveCommand;
+  private final PanelSpinner spinner;
+
+  private final CollectorGate gate;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -45,8 +49,19 @@ public class RobotContainer {
                               RobotMap.RIGHT_GEARBOX_LEFT, RobotMap.RIGHT_GEARBOX_RIGHT);
 
     driveBase = new DriveBase(left, right);
+    spinner = new PanelSpinner(RobotMap.CONTROL_PANEL_SPINNER);
+    gate = new CollectorGate(RobotMap.POWER_CELL_GATE_CONTROLLER_LEFT, RobotMap.POWER_CELL_GATE_CONTROLLER_RIGHT);
 
-    driveCommand = new Drive(driveBase, (DoubleSupplier)Robot.oi.driveLeft, (DoubleSupplier)Robot.oi.driveRight);
+    driveBase.setDefaultCommand(
+      new Drive(
+        driveBase,
+        () -> Robot.oi.driveLeft.getY(),
+        () -> Robot.oi.driveRight.getY()));
+    
+    spinner.setDefaultCommand(
+      new SpinPanel(
+        spinner,
+        () -> Robot.oi.toolOp.getX(GenericHID.Hand.kLeft)));
   }
 
   /**
@@ -57,6 +72,9 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     Robot.oi.gearboxShift.whenPressed(new DriveShift(driveBase));
+    
+    Robot.oi.powerCellGateOpen.whenPressed(new OpenGate(gate));
+    Robot.oi.powerCellGateClose.whenPressed(new CloseGate(gate));
   }
 
   /**

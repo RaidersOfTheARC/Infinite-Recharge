@@ -2,7 +2,7 @@ package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+    import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.subsystems.DriveBase;
 
@@ -12,10 +12,10 @@ public class Drive extends CommandBase {
     private final DriveBase m_drive;
     private final DoubleSupplier m_left, m_right;
 
-    public Drive(DriveBase drivetrain, DoubleSupplier left, DoubleSupplier right) {
+    public Drive(DriveBase drivetrain, DoubleSupplier driveLeft, DoubleSupplier driveRight) {
         m_drive = drivetrain;
-        m_left = left;
-        m_right = right;
+        m_left = driveLeft;
+        m_right = driveRight;
 
         addRequirements(drivetrain);
     }

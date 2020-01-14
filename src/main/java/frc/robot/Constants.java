@@ -16,4 +16,50 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+    public static final class DriveConstants {
+
+        public static double kWheelDiameter = 6;   // inches
+        public static double kTrackWidth = 30;     // inches
+
+        public static double kPi = Math.PI;         // for the sake of consistency..?
+        
+        // calculations
+        public static double kWheelCircumference = kWheelDiameter * kPi;
+
+        /**
+         * The constants for the drive motors in {@link RobotMap}
+         */
+        public static int kLeftGearboxLeftMotor = 10;
+        public static int kRightGearboxLeftMotor = 20;
+        public static int kLeftGearboxRightMotor = 30;
+        public static int kRightGearboxRightMotor = 40;
+
+        /**
+         * The constants for the solenoids for the gearboxes
+         */
+        public static int kSpeedMode = 0;
+        public static int kTorqueMode = 1;
+
+    }
+
+    public static final class OIConstants {
+
+        public static int kLeftJoystick = 0;
+        public static int kRightJoystick = 1;
+
+        public static int kGearboxShiftButton = 1;
+
+        public static int kToolOp = 2;
+
+    }
+
+    public static final class SubsystemConstants {
+
+        public static int kControlPanelSpinner = 8;
+        public static int kPowerCellGateLeft = 4;
+        public static int kPowerCellGateRight = 5;
+
+    }
+
 }
