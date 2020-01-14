@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+
 import frc.robot.commands.CloseGate;
 import frc.robot.commands.Drive;
 import frc.robot.commands.DriveShift;
@@ -72,7 +73,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     Robot.oi.gearboxShift.whenPressed(new DriveShift(driveBase));
-    
+
     Robot.oi.powerCellGateOpen.whenPressed(new OpenGate(gate));
     Robot.oi.powerCellGateClose.whenPressed(new CloseGate(gate));
   }
