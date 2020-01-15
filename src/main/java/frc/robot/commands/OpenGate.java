@@ -9,6 +9,8 @@ public class OpenGate extends CommandBase {
 
     public OpenGate(CollectorGate gate) {
         m_gate = gate;
+
+        addRequirements(gate);
     }
 
     @Override

@@ -59,6 +59,10 @@ public final class Constants {
         public static int kControlPanelSpinner = 8;
         public static int kPowerCellGateLeft = 4;
         public static int kPowerCellGateRight = 5;
+        public static int kLiftIn = 2;
+        public static int kLiftOut = 3;
+
+        public static int kCompressor = 0;
 
     }
 

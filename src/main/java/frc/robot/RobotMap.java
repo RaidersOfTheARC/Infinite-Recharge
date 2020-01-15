@@ -22,6 +22,8 @@ public class RobotMap {
     public static VictorSPX CONTROL_PANEL_SPINNER;          // the motor that spins the control panel
     public static Servo POWER_CELL_GATE_CONTROLLER_LEFT;    // the leftside servo for the power cell collector gate
     public static Servo POWER_CELL_GATE_CONTROLLER_RIGHT;   // the rightside servo for the power cell collector gate
+    public static Solenoid LIFT_IN;                         // the solenoid that brings the lift piston into the cylinder
+    public static Solenoid LIFT_OUT;                        // the solenoid that pushes the lift piston out of the cylinder
 
     public static void init() {
 
@@ -52,7 +54,8 @@ public class RobotMap {
         CONTROL_PANEL_SPINNER = new VictorSPX(SubsystemConstants.kControlPanelSpinner);
         POWER_CELL_GATE_CONTROLLER_LEFT = new Servo(SubsystemConstants.kPowerCellGateLeft);
         POWER_CELL_GATE_CONTROLLER_RIGHT = new Servo(SubsystemConstants.kPowerCellGateRight);
-
+        LIFT_IN = new Solenoid(SubsystemConstants.kLiftIn);
+        LIFT_OUT = new Solenoid(SubsystemConstants.kLiftOut);
     }
 
 }

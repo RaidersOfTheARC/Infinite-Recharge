@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 
+import frc.robot.commands.ActuateLift;
 import frc.robot.commands.CloseGate;
 import frc.robot.commands.Drive;
 import frc.robot.commands.DriveShift;
@@ -20,6 +21,7 @@ import frc.robot.subsystems.CollectorGate;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.DriveGearbox;
 import frc.robot.subsystems.PanelSpinner;
+import frc.robot.subsystems.PneumaticLift;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -30,12 +32,10 @@ import frc.robot.subsystems.PanelSpinner;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveGearbox left, right;
-
   private final DriveBase driveBase;
-
   private final PanelSpinner spinner;
-
   private final CollectorGate gate;
+  private final PneumaticLift lift;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -52,6 +52,8 @@ public class RobotContainer {
     driveBase = new DriveBase(left, right);
     spinner = new PanelSpinner(RobotMap.CONTROL_PANEL_SPINNER);
     gate = new CollectorGate(RobotMap.POWER_CELL_GATE_CONTROLLER_LEFT, RobotMap.POWER_CELL_GATE_CONTROLLER_RIGHT);
+
+    lift = new PneumaticLift(RobotMap.LIFT_IN, RobotMap.LIFT_OUT);
 
     driveBase.setDefaultCommand(
       new Drive(
@@ -76,6 +78,8 @@ public class RobotContainer {
 
     Robot.oi.powerCellGateOpen.whenPressed(new OpenGate(gate));
     Robot.oi.powerCellGateClose.whenPressed(new CloseGate(gate));
+
+    Robot.oi.liftActuate.whenPressed(new ActuateLift(lift));
   }
 
   /**
