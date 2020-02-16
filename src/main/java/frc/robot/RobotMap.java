@@ -20,6 +20,7 @@ public class RobotMap {
     public static Solenoid TORQUE_MODE_ACTUATOR;            // the torque mode actuator for the drive base
 
     public static VictorSPX CONTROL_PANEL_SPINNER;          // the motor that spins the control panel
+    public static VictorSPX PANEL_LIFT_MOTOR;               // the motor that controls the lift for the spinner
     public static Servo POWER_CELL_GATE_CONTROLLER_LEFT;    // the leftside servo for the power cell collector gate
     public static Servo POWER_CELL_GATE_CONTROLLER_RIGHT;   // the rightside servo for the power cell collector gate
     public static Solenoid LIFT_IN;                         // the solenoid that brings the lift piston into the cylinder
@@ -52,6 +53,7 @@ public class RobotMap {
         TORQUE_MODE_ACTUATOR = new Solenoid(DriveConstants.kTorqueMode);
 
         CONTROL_PANEL_SPINNER = new VictorSPX(SubsystemConstants.kControlPanelSpinner);
+        PANEL_LIFT_MOTOR = new VictorSPX(SubsystemConstants.kControlPanelLiftControl);
         POWER_CELL_GATE_CONTROLLER_LEFT = new Servo(SubsystemConstants.kPowerCellGateLeft);
         POWER_CELL_GATE_CONTROLLER_RIGHT = new Servo(SubsystemConstants.kPowerCellGateRight);
         LIFT_IN = new Solenoid(SubsystemConstants.kLiftIn);

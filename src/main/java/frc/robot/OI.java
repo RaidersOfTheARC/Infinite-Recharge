@@ -1,6 +1,5 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -8,17 +7,16 @@ import frc.robot.Constants.OIConstants;
 
 public class OI {
 
-    public Joystick driveLeft, driveRight;
+    public XboxController driveController;
     public JoystickButton gearboxShift;
 
     public XboxController toolOp;
     public JoystickButton powerCellGateOpen, powerCellGateClose, liftActuate;
 
     public OI() {
-        driveLeft = new Joystick(OIConstants.kLeftJoystick);
-        driveRight = new Joystick(OIConstants.kRightJoystick);
+        driveController = new XboxController(OIConstants.kDriveController);
 
-        gearboxShift = new JoystickButton(driveLeft, OIConstants.kGearboxShiftButton);
+        gearboxShift = new JoystickButton(driveController, OIConstants.kGearboxShiftButton);
 
         toolOp = new XboxController(OIConstants.kToolOp);
         powerCellGateOpen = new JoystickButton(toolOp, Button.kBumperLeft.value);

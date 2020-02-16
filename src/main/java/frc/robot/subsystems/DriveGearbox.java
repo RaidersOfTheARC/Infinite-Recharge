@@ -8,15 +8,17 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.SpeedController;
+
+import com.revrobotics.CANSparkMax;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveGearbox extends SubsystemBase {
     
-    SpeedController[] m_controllers;
+    CANSparkMax[] m_controllers;
     Solenoid m_actuatorIn, m_actuatorOut;
 
-    public DriveGearbox(Solenoid shifterIn, Solenoid shifterOut, SpeedController... controllers) {
+    public DriveGearbox(Solenoid shifterIn, Solenoid shifterOut, CANSparkMax... controllers) {
         m_controllers = controllers;
         m_actuatorIn = shifterIn;
         m_actuatorOut = shifterOut;
@@ -37,20 +39,20 @@ public class DriveGearbox extends SubsystemBase {
     }
 
     public void driveOutput(double speed) {
-        for (SpeedController controller : m_controllers) {
+        for (CANSparkMax controller : m_controllers) {
             controller.set(speed);
         }
     }
 
     public void disable() {
-        for (SpeedController controller : m_controllers) {
+        for (CANSparkMax controller : m_controllers) {
             controller.disable();
         }
     }
 
     public void shift(boolean isShifted) {
-        m_actuatorIn.set(isShifted);
-        m_actuatorOut.set(!isShifted);
+       m_actuatorIn.set(isShifted);
+       m_actuatorOut.set(!isShifted);
     }
 
 }

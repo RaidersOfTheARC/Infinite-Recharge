@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.XboxController.Button;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -30,10 +32,10 @@ public final class Constants {
         /**
          * The constants for the drive motors in {@link RobotMap}
          */
-        public static int kLeftGearboxLeftMotor = 10;
-        public static int kRightGearboxLeftMotor = 20;
-        public static int kLeftGearboxRightMotor = 30;
-        public static int kRightGearboxRightMotor = 40;
+        public static int kLeftGearboxLeftMotor = 5;
+        public static int kRightGearboxLeftMotor = 7;
+        public static int kLeftGearboxRightMotor = 6;
+        public static int kRightGearboxRightMotor = 8;
 
         /**
          * The constants for the solenoids for the gearboxes
@@ -45,18 +47,18 @@ public final class Constants {
 
     public static final class OIConstants {
 
-        public static int kLeftJoystick = 0;
-        public static int kRightJoystick = 1;
+        public static int kDriveController = 0;
 
-        public static int kGearboxShiftButton = 1;
+        public static int kGearboxShiftButton = Button.kBumperRight.value;
 
-        public static int kToolOp = 2;
+        public static int kToolOp = 1;
 
     }
 
     public static final class SubsystemConstants {
 
-        public static int kControlPanelSpinner = 8;
+        public static int kControlPanelSpinner = 10;
+        public static int kControlPanelLiftControl = 11;
         public static int kPowerCellGateLeft = 4;
         public static int kPowerCellGateRight = 5;
         public static int kLiftIn = 2;

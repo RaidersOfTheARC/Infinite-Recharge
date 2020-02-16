@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.ActuateLift;
@@ -16,6 +17,7 @@ import frc.robot.commands.CloseGate;
 import frc.robot.commands.Drive;
 import frc.robot.commands.DriveShift;
 import frc.robot.commands.OpenGate;
+import frc.robot.commands.PanelLift;
 import frc.robot.commands.SpinPanel;
 import frc.robot.subsystems.CollectorGate;
 import frc.robot.subsystems.DriveBase;
@@ -36,6 +38,7 @@ public class RobotContainer {
   private final PanelSpinner spinner;
   private final CollectorGate gate;
   private final PneumaticLift lift;
+  private final PanelLift liftCommand;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -50,7 +53,7 @@ public class RobotContainer {
                               RobotMap.RIGHT_GEARBOX_LEFT, RobotMap.RIGHT_GEARBOX_RIGHT);
 
     driveBase = new DriveBase(left, right);
-    spinner = new PanelSpinner(RobotMap.CONTROL_PANEL_SPINNER);
+    spinner = new PanelSpinner(RobotMap.CONTROL_PANEL_SPINNER, RobotMap.PANEL_LIFT_MOTOR);
     gate = new CollectorGate(RobotMap.POWER_CELL_GATE_CONTROLLER_LEFT, RobotMap.POWER_CELL_GATE_CONTROLLER_RIGHT);
 
     lift = new PneumaticLift(RobotMap.LIFT_IN, RobotMap.LIFT_OUT);
@@ -58,13 +61,17 @@ public class RobotContainer {
     driveBase.setDefaultCommand(
       new Drive(
         driveBase,
-        () -> Robot.oi.driveLeft.getY(),
-        () -> Robot.oi.driveRight.getY()));
+        () -> Robot.oi.driveController.getY(Hand.kLeft),
+        () -> Robot.oi.driveController.getY(Hand.kRight)));
     
     spinner.setDefaultCommand(
       new SpinPanel(
         spinner,
-        () -> Robot.oi.toolOp.getX(GenericHID.Hand.kLeft)));
+        () -> Robot.oi.toolOp.getX(Hand.kLeft)));
+
+    liftCommand = new PanelLift(
+      spinner,
+      () -> Robot.oi.toolOp.getY(Hand.kRight));
   }
 
   /**
