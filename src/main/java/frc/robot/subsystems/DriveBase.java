@@ -21,4 +21,10 @@ public class DriveBase extends SubsystemBase {
         }
     }
 
+    public void changeMode(boolean isShifted) {
+        for (DriveGearbox gearbox : gearboxes) {
+            gearbox.shift(isShifted);
+        }
+    }
+
 }
