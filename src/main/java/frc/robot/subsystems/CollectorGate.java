@@ -1,22 +1,25 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.hardware.GoBILDAServo;
 
 public class CollectorGate extends SubsystemBase {
 
-    private Servo m_left, m_right;
+    private GoBILDAServo m_left, m_right;
 
-    public CollectorGate(Servo left, Servo right) {
+    public CollectorGate(GoBILDAServo left, GoBILDAServo right) {
         m_left = left;
         m_right = right;
 
-        lock();
+        m_left.setReverse(true);
+        m_right.setReverse(false);
+
+        lock(); 
     }
 
     public void lock() {
-        m_left.set(0);
-        m_right.set(1);
+        m_left.set(0.8);
+        m_right.set(0.8);
     }
 
     public void disable() {
@@ -25,8 +28,13 @@ public class CollectorGate extends SubsystemBase {
     }
 
     public void release() {
-        m_left.set(0.75);
-        m_right.set(0.25);
+        m_left.set(0.5);
+        m_right.set(0.5);
+    }
+
+    public void intake() {
+        m_left.set(0.68);
+        m_right.set(0.68);
     }
 
 }

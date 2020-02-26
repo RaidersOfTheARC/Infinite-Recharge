@@ -16,13 +16,11 @@ import frc.robot.commands.ActuateLift;
 import frc.robot.commands.CloseGate;
 import frc.robot.commands.Drive;
 import frc.robot.commands.DriveShift;
+import frc.robot.commands.Intake;
 import frc.robot.commands.OpenGate;
-import frc.robot.commands.PanelLift;
-import frc.robot.commands.SpinPanel;
 import frc.robot.subsystems.CollectorGate;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.DriveGearbox;
-import frc.robot.subsystems.PanelSpinner;
 import frc.robot.subsystems.PneumaticLift;
 
 /**
@@ -35,10 +33,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveGearbox left, right;
   private final DriveBase driveBase;
-  private final PanelSpinner spinner;
   private final CollectorGate gate;
   private final PneumaticLift lift;
-  private final PanelLift liftCommand;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -53,9 +49,7 @@ public class RobotContainer {
                               RobotMap.RIGHT_GEARBOX_LEFT, RobotMap.RIGHT_GEARBOX_RIGHT);
 
     driveBase = new DriveBase(left, right);
-    spinner = new PanelSpinner(RobotMap.CONTROL_PANEL_SPINNER, RobotMap.PANEL_LIFT_MOTOR);
     gate = new CollectorGate(RobotMap.POWER_CELL_GATE_CONTROLLER_LEFT, RobotMap.POWER_CELL_GATE_CONTROLLER_RIGHT);
-
     lift = new PneumaticLift(RobotMap.LIFT_IN, RobotMap.LIFT_OUT);
 
     driveBase.setDefaultCommand(
@@ -63,15 +57,6 @@ public class RobotContainer {
         driveBase,
         () -> Robot.oi.driveController.getY(Hand.kLeft),
         () -> Robot.oi.driveController.getY(Hand.kRight)));
-    
-    spinner.setDefaultCommand(
-      new SpinPanel(
-        spinner,
-        () -> Robot.oi.toolOp.getX(Hand.kLeft)));
-
-    liftCommand = new PanelLift(
-      spinner,
-      () -> Robot.oi.toolOp.getY(Hand.kRight));
   }
 
   /**
@@ -85,6 +70,7 @@ public class RobotContainer {
 
     Robot.oi.powerCellGateOpen.whenPressed(new OpenGate(gate));
     Robot.oi.powerCellGateClose.whenPressed(new CloseGate(gate));
+    Robot.oi.powerCellGateIntake.whenPressed(new Intake(gate));
 
     Robot.oi.liftActuate.whenPressed(new ActuateLift(lift));
   }
