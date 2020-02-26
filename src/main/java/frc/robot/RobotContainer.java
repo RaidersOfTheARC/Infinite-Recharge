@@ -56,7 +56,7 @@ public class RobotContainer {
       new Drive(
         driveBase,
         () -> Robot.oi.driveController.getY(Hand.kLeft),
-        () -> Robot.oi.driveController.getY(Hand.kRight)));
+        () -> Robot.oi.driveController.getX(Hand.kRight)));
   }
 
   /**

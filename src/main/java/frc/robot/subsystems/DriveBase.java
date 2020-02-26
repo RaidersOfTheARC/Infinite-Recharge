@@ -10,9 +10,9 @@ public class DriveBase extends SubsystemBase {
         gearboxes = new DriveGearbox[]{left, right};
     }
 
-    public void drive(double left, double right) {
-        gearboxes[0].driveOutput(left);
-        gearboxes[1].driveOutput(right);
+    public void drive(double y, double x) {
+        gearboxes[0].driveOutput(y + x);
+        gearboxes[1].driveOutput(y - x);
     }
 
     public void disable() {
