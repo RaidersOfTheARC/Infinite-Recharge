@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.PWM;
  * GoBILDA 2000 series servo
  */
 public class GoBILDAServo extends PWM {
-  private static final double kMaxServoAngle = 180.0;
+  private static final double kMaxServoAngle = 300.0;
   private static final double kMinServoAngle = 0.0;
 
   private boolean reversed;
