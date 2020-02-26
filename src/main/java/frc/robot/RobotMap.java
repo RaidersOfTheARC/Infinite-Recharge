@@ -4,10 +4,10 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.SubsystemConstants;
+import frc.robot.hardware.GoBILDAServo;
 
 public class RobotMap {
 
@@ -21,8 +21,8 @@ public class RobotMap {
 
     public static VictorSPX CONTROL_PANEL_SPINNER;          // the motor that spins the control panel
     public static VictorSPX PANEL_LIFT_MOTOR;               // the motor that controls the lift for the spinner
-    public static Servo POWER_CELL_GATE_CONTROLLER_LEFT;    // the leftside servo for the power cell collector gate
-    public static Servo POWER_CELL_GATE_CONTROLLER_RIGHT;   // the rightside servo for the power cell collector gate
+    public static GoBILDAServo POWER_CELL_GATE_CONTROLLER_LEFT;    // the leftside servo for the power cell collector gate
+    public static GoBILDAServo POWER_CELL_GATE_CONTROLLER_RIGHT;   // the rightside servo for the power cell collector gate
     public static Solenoid LIFT_IN;                         // the solenoid that brings the lift piston into the cylinder
     public static Solenoid LIFT_OUT;                        // the solenoid that pushes the lift piston out of the cylinder
 
@@ -54,8 +54,8 @@ public class RobotMap {
 
         CONTROL_PANEL_SPINNER = new VictorSPX(SubsystemConstants.kControlPanelSpinner);
         PANEL_LIFT_MOTOR = new VictorSPX(SubsystemConstants.kControlPanelLiftControl);
-        POWER_CELL_GATE_CONTROLLER_LEFT = new Servo(SubsystemConstants.kPowerCellGateLeft);
-        POWER_CELL_GATE_CONTROLLER_RIGHT = new Servo(SubsystemConstants.kPowerCellGateRight);
+        POWER_CELL_GATE_CONTROLLER_LEFT = new GoBILDAServo(SubsystemConstants.kPowerCellGateLeft);
+        POWER_CELL_GATE_CONTROLLER_RIGHT = new GoBILDAServo(SubsystemConstants.kPowerCellGateRight);
         LIFT_IN = new Solenoid(SubsystemConstants.kLiftIn);
         LIFT_OUT = new Solenoid(SubsystemConstants.kLiftOut);
     }

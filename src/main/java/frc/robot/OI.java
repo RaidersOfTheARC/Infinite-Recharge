@@ -11,7 +11,7 @@ public class OI {
     public JoystickButton gearboxShift;
 
     public XboxController toolOp;
-    public JoystickButton powerCellGateOpen, powerCellGateClose, liftActuate;
+    public JoystickButton powerCellGateOpen, powerCellGateClose, liftActuate, powerCellGateIntake;
 
     public OI() {
         driveController = new XboxController(OIConstants.kDriveController);
@@ -19,9 +19,10 @@ public class OI {
         gearboxShift = new JoystickButton(driveController, OIConstants.kGearboxShiftButton);
 
         toolOp = new XboxController(OIConstants.kToolOp);
-        powerCellGateOpen = new JoystickButton(toolOp, Button.kBumperLeft.value);
-        powerCellGateClose = new JoystickButton(toolOp, Button.kBumperRight.value);
+        powerCellGateOpen = new JoystickButton(driveController, Button.kBumperLeft.value);
+        powerCellGateClose = new JoystickButton(driveController, Button.kBumperRight.value);
         liftActuate = new JoystickButton(toolOp, Button.kA.value);
+        powerCellGateIntake = new JoystickButton(driveController, Button.kA.value);
     }
 
 }
